@@ -19,16 +19,17 @@
 
 		<div class="row">
 			<div class="col-md-6">
-				<form>
+				<form method="POST" action="{{ route('posts.store')}}">
+					{{ csrf_field() }}
 					<div class="form-group">
 						<label>Title:</label>
-						<input type="text" class="form-control" id="title">
+						<input type="text" name="title" class="form-control" >
 					</div>
 
 
 					<div class="form-group">
 						<label>Body:</label>
-						<textarea class="form-control" rows="5"></textarea>
+						<textarea class="form-control" name="body" rows="5"></textarea>
 					</div>
 					<button type="submit" class="btn btn-primary">Submit your post</button>
 
