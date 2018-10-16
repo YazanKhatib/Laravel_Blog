@@ -1,14 +1,19 @@
 <!doctype html>
 <html lang="en">
 
-<head>
-    @include('partials._head')
-</head>
+	<head> 	
+		@include('partials._head')
+	</head>
 
-@include('partials._nav')
-@yield('content')
+	<body>
+		@include('partials._nav')
 
-@include('partials._footer')
-@include('partials._javascript')
+		<div class="container spacing">
+			@yield('content')
+			@include('partials._footer')
+		</div>
+
+		@include('partials._javascript')
+	</body>
 
 </html>

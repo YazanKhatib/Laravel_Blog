@@ -25,6 +25,7 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function create()
     {
         return view('posts.create'); 
@@ -36,6 +37,7 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(Request $request)
     {
         // Validate the database 
@@ -60,6 +62,7 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function show($id)
     {
         $post = Post::find($id); 
@@ -73,9 +76,12 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function edit($id)
     {
-        //
+        $post = Post::find($id); 
+
+        return view('posts.edit')->withPost($post); 
     }
 
     /**
@@ -85,9 +91,25 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function update(Request $request, $id)
     {
-        //
+        $post = Post::find($id); 
+
+        $this->validate($request, array(
+            'title' => 'required|max:255',
+            'body' => 'required'
+        ));
+
+       $post = Post::find($id); 
+        $post->title = $request->input('title');
+        $post->body = $request->input('body'); 
+
+        $post->save();
+
+        Session::flash('success', 'The post was successfully updated'); 
+
+        return redirect()->route('posts.show', $post->id); 
     }
 
     /**
@@ -96,8 +118,15 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function destroy($id)
     {
-        //
+        $post = Post::find($id);
+
+        $post->delete(); 
+
+        Session::flash('success', 'The post was successfly deleted'); 
+        return redirect()->route('posts.index'); 
+
     }
 }

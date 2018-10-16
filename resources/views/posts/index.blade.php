@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div class ="container spacing">
+
 	<div class ="row" >
 		<div class="col-md-2">
 			<strong class="text-center font-italic">ID</strong>
@@ -38,6 +38,5 @@
 	@endforeach 
 	
 		<a href="{{ route('posts.create') }}" class="btn btn-primary">Make new Post</a>
-</div>
 
 @endsection
